@@ -1,14 +1,55 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import MainStackNavigator from './navigation/navigation';
+import { Provider } from 'react-redux';
+import globalStyle from './assets/styles/globalStyle';
+import Store from './src/configRedux';
+import consts from './src/consts';
+import * as Font from 'expo-font';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      appIsReady: false
+    };
+  }
+
+
+  async componentDidMount() {
+    try {
+      await Font.loadAsync({
+        'Raleway-Regular': require('./assets/fonts/Raleway/static/Raleway-Regular.ttf'),
+      }),
+        await Font.loadAsync({
+          'Raleway-Medium': require('./assets/fonts/Raleway/static/Raleway-Medium.ttf'),
+        })
+      this.setState({ appIsReady: true })
+    } catch (error) {
+      console.log(error)
+      return
+    }
+  }
+
+
+  render() {
+    if (this.state.appIsReady) {
+      return (
+        <Provider store={Store}>
+          <StatusBar barStyle="dark-content" />
+          <MainStackNavigator />
+        </Provider>
+      );
+    }
+    else {
+      return (
+        <View style={globalStyle.containerLoading}>
+          <ActivityIndicator size="large" color={consts.BROWN} />
+        </View>)
+    }
+  }
 }
 
 const styles = StyleSheet.create({
@@ -19,3 +60,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+export default App;
