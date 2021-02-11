@@ -10,6 +10,8 @@ import Login from '../screens/connection/Login';
 
 import Home from '../screens/house/Home';
 
+import HomeSettings from '../screens/settings/Home';
+
 
 function MainStackNavigator() {
   return (
@@ -32,6 +34,16 @@ const StackTabs = function MyTabs() {
         options={{
           tabBarIcon: ({ color, size }) => (
             <Icon name="ios-home" size={size} color={color} />
+          ),
+          gestureEnabled: false
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsComponent}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="ios-settings" size={size} color={color} />
           ),
           gestureEnabled: false
         }}
@@ -65,6 +77,21 @@ function HomeComponent() {
       <Stack.Screen
         name="Home"
         component={Home}
+        options={{ title: '', headerTransparent: true, gestureEnabled: false, headerLeft: null }}
+      />
+   
+      <Stack.Screen name="Stackstabs" component={StackTabs} options={{ title: '', headerShown: false, headerLeft: null, gestureEnabled: false }} />
+
+    </Stack.Navigator>
+  );
+}
+
+function SettingsComponent() {
+  return (
+    <Stack.Navigator initialRouteName='Connection' screenOptions={{ animationEnabled: false }}>
+      <Stack.Screen
+        name="Home"
+        component={HomeSettings}
         options={{ title: '', headerTransparent: true, gestureEnabled: false, headerLeft: null }}
       />
    
