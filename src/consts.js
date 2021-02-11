@@ -8,7 +8,8 @@ export default {
     API_URL: '',
     API_URL_LOCAL: '',
 
-    BROWN: '#C1AD8F',
+    BLUE: '#A1E3E3',
+    DARK_BLUE: '#00CED1',
     BACKGROUND_COLOR: '#F8F8F8',
     LIGHT_GRAY: '#9D9D9D',
     GREEN: '#26C397',

@@ -46,7 +46,7 @@ class App extends Component {
     else {
       return (
         <View style={globalStyle.containerLoading}>
-          <ActivityIndicator size="large" color={consts.BROWN} />
+          <ActivityIndicator size="large" color={consts.BLUE} />
         </View>)
     }
   }

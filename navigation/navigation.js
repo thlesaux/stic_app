@@ -27,7 +27,7 @@ const Stack = createStackNavigator();
 
 const StackTabs = function MyTabs() {
   return (
-    <Tab.Navigator tabBarOptions={{ activeTintColor: consts.BROWN, inactiveTintColor: '#4E4D53' }}>
+    <Tab.Navigator tabBarOptions={{ activeTintColor: consts.BLUE, inactiveTintColor: '#4E4D53' }}>
       <Tab.Screen
         name="Home"
         component={HomeComponent}
