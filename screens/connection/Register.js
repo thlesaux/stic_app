@@ -5,25 +5,45 @@ import globalStyle from '../../assets/styles/globalStyle';
 import consts from '../../src/consts';
 
 
-class Login extends Component {
+class Register extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            firstName : null,
+            lastName : null,
             email: null,
-            password: null
+            password: null,
+            confirmPassword: null
         };
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.containerTitle}>
-                    <Text style={[globalStyle.fontTextRegular, styles.textTitle]}>Stic</Text>
-                </View>
                 <View style={styles.containerListInput}>
                     <View style={[styles.inputContainer, { marginBottom: '5%' }]}>
-                        <Text style={[globalStyle.fontTextRegular, styles.labelInput]}>Email</Text>
+                        <Text style={[globalStyle.fontTextRegular, styles.labelInput]}>Prénom*</Text>
+                        <TextInput
+                            value={this.state.firstName}
+                            onChangeText={(firstName) => { this.setState({ firstName }); }}
+                            style={[styles.input, globalStyle.fontTextRegular]}
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                        />
+                    </View>
+                    <View style={[styles.inputContainer, { marginBottom: '5%' }]}>
+                        <Text style={[globalStyle.fontTextRegular, styles.labelInput]}>Nom*</Text>
+                        <TextInput
+                            value={this.state.lastName}
+                            onChangeText={(lastName) => { this.setState({ lastName }); }}
+                            style={[styles.input, globalStyle.fontTextRegular]}
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                        />
+                    </View>
+                    <View style={[styles.inputContainer, { marginBottom: '5%' }]}>
+                        <Text style={[globalStyle.fontTextRegular, styles.labelInput]}>Email*</Text>
                         <TextInput
                             value={this.state.email}
                             onChangeText={(email) => { this.setState({ email }); }}
@@ -33,7 +53,7 @@ class Login extends Component {
                         />
                     </View>
                     <View style={[styles.inputContainer]}>
-                        <Text style={[globalStyle.fontTextRegular, styles.labelInput]}>Mot de passe</Text>
+                        <Text style={[globalStyle.fontTextRegular, styles.labelInput]}>Mot de passe*</Text>
                         <TextInput
                             value={this.state.password}
                             onChangeText={(password) => { this.setState({ password }); }}
@@ -46,15 +66,8 @@ class Login extends Component {
                 </View>
                 <View style={{ width: '100%', alignItems: 'center' }}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Stackstabs')} style={styles.buttonConnect}>
-                        <Text style={[globalStyle.fontTextRegular, styles.buttonConnectText]}>Se connecter</Text>
+                        <Text style={[globalStyle.fontTextRegular, styles.buttonConnectText]}>S'inscrire</Text>
                     </TouchableOpacity>
-                    <View>
-                        <Text style={globalStyle.fontTextRegular}>Pas encore de compte ?
-                            <Text style={{ color: consts.BLUE }} onPress={() => this.props.navigation.navigate('Register')}>
-                                {' '}S'inscrire
-                            </Text>
-                        </Text>
-                    </View>
                 </View>
             </View>
         );
@@ -103,7 +116,6 @@ const styles = StyleSheet.create({
         paddingTop: '4%',
         paddingBottom: '4%',
         borderRadius: 5,
-        // padding: '4%',
         width: '70%',
         marginBottom: '3%'
     },
@@ -113,4 +125,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Login;
+export default Register;
