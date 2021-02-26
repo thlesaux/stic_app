@@ -13,6 +13,7 @@ import Home from '../screens/house/Home';
 
 import SettingsHome from '../screens/settings/SettingsHome';
 import AboutUs from '../screens/settings/AboutUs';
+import Help from '../screens/settings/Help';
 
 
 function MainStackNavigator() {
@@ -57,7 +58,7 @@ const StackTabs = function MyTabs() {
 function App() {
   return (
     <Stack.Navigator initialRouteName='Connection' screenOptions={{ animationEnabled: false }}>
-    
+
       <Stack.Screen
         name="Login"
         component={Login}
@@ -67,7 +68,7 @@ function App() {
         name="Register"
         component={Register}
         options={{ title: 'Inscription', headerTransparent: false, gestureEnabled: false, headerTintColor: '#FFF', headerStyle: { backgroundColor: consts.BLUE } }}
-        />
+      />
 
 
       <Stack.Screen name="Stackstabs" component={StackTabs} options={{ title: '', headerShown: false, headerLeft: null, gestureEnabled: false }} />
@@ -86,7 +87,7 @@ function HomeComponent() {
         component={Home}
         options={{ title: '', headerTransparent: true, gestureEnabled: false, headerLeft: null }}
       />
-   
+
       <Stack.Screen name="Stackstabs" component={StackTabs} options={{ title: '', headerShown: false, headerLeft: null, gestureEnabled: false }} />
 
     </Stack.Navigator>
@@ -101,13 +102,19 @@ function SettingsComponent() {
         component={SettingsHome}
         options={{ title: '', headerTransparent: true, gestureEnabled: false, headerLeft: null }}
       />
-   
+
       <Stack.Screen
         name="AboutUs"
         component={AboutUs}
         options={{ title: 'La team', headerTransparent: false, gestureEnabled: false, headerTintColor: '#FFF', headerStyle: { backgroundColor: consts.BLUE } }}
       />
-   
+
+      <Stack.Screen
+        name="Help"
+        component={Help}
+        options={{ title: 'Aide', headerTransparent: false, gestureEnabled: false, headerTintColor: '#FFF', headerStyle: { backgroundColor: consts.BLUE } }}
+      />
+
       <Stack.Screen name="Stackstabs" component={StackTabs} options={{ title: '', headerShown: false, headerLeft: null, gestureEnabled: false }} />
 
     </Stack.Navigator>

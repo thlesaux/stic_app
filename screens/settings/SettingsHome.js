@@ -150,7 +150,7 @@ class SettingsHome extends Component {
 
           <View style={[styles.containerButtonsSettings]}>
 
-            <TouchableOpacity style={styles.buttonSetting} onPress={() => { this.props.navigation.navigate('SettingsHelp') }}>
+            <TouchableOpacity style={styles.buttonSetting} onPress={() => { this.props.navigation.navigate('Help') }}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Icon name="ios-help-circle-outline" size={24} color={consts.BLACK} />
                 <Text style={[globalStyle.fontTextRegular, styles.textButtonSetting]}>
