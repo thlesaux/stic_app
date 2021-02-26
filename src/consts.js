@@ -15,7 +15,9 @@ export default {
     GREEN: '#26C397',
     BLACK: '#4E4D53',
     RED: '#cc0000',
+    WHITE: '#FFF',
 
-    FONT_SIZE_TITLE: 22,
+    FONT_SIZE_TITLE: 32,
+    FONT_SIZE_BUTTON: 30
     
 };
