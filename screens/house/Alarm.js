@@ -29,7 +29,7 @@ class Alarm extends Component {
                         <Text style={[globalStyle.fontTextRegular, styles.textTitle]}>Alarme</Text>
                     </View>
                     <View style={[styles.circle, styles.marginView, globalStyle.shadowStyle]}>
-                        <Icon name="lock" size={50} color={consts.BLACK}/>
+                        <Icon name="lock" size={consts.ICON_SIZE} color={consts.BLACK}/>
                     </View>
                     <View style={styles.buttonView}>
                         <TouchableOpacity style={[styles.buttonGlobalStyle, styles.buttonOnStyle, globalStyle.shadowStyle]}>

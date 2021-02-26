@@ -18,6 +18,7 @@ export default {
     WHITE: '#FFF',
 
     FONT_SIZE_TITLE: 32,
-    FONT_SIZE_BUTTON: 30
+    FONT_SIZE_BUTTON: 30,
+    ICON_SIZE: 50
     
 };
