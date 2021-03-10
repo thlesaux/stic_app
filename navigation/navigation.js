@@ -2,7 +2,7 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Icon from "react-native-vector-icons/Ionicons";
+import Icon from 'react-native-vector-icons/Ionicons';
 // import globalStyle from '../assets/styles/globalStyle';
 import consts from '../src/consts';
 import Button from 'react-native'
@@ -10,7 +10,9 @@ import Button from 'react-native'
 import Login from '../screens/connection/Login';
 
 import Home from '../screens/house/Home';
-import Alarm from "../screens/house/Alarm";
+import Alarm from '../screens/house/Alarm';
+import Lighting from '../screens/house/Lighting'
+import Shutter from '../screens/house/Shutter'
 
 import HomeSettings from '../screens/settings/Home';
 
@@ -88,6 +90,28 @@ function HomeComponent() {
                 component={Alarm}
                 options={{
                     title: 'Alarme',
+                    headerTransparent: false,
+                    gestureEnabled: false,
+                    headerTintColor: consts.BLACK,
+                    headerStyle: {backgroundColor: consts.WHITE}
+                }}
+            />
+            <Stack.Screen
+                name="Lighting"
+                component={Lighting}
+                options={{
+                    title: 'Éclairage',
+                    headerTransparent: false,
+                    gestureEnabled: false,
+                    headerTintColor: consts.BLACK,
+                    headerStyle: {backgroundColor: consts.WHITE}
+                }}
+            />
+            <Stack.Screen
+                name="Shutter"
+                component={Shutter}
+                options={{
+                    title: 'Volets',
                     headerTransparent: false,
                     gestureEnabled: false,
                     headerTintColor: consts.BLACK,

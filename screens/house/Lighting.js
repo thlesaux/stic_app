@@ -5,13 +5,13 @@ import consts from '../../src/consts';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-class Alarm extends Component {
+class Lighting extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             loading: false,
-            alarmState: false,
+            lightingState: false,
         };
     }
 
@@ -26,21 +26,19 @@ class Alarm extends Component {
             return (
                 <View style={styles.container}>
                     <View style={styles.marginView}>
-                        <Text style={[globalStyle.fontTextRegular, styles.textTitle]}>Alarme</Text>
+                        <Text style={[globalStyle.fontTextRegular, styles.textTitle]}>Éclairage</Text>
                     </View>
-                    <View style={[styles.circle, styles.marginView, globalStyle.shadowStyle]}>
-                        <Icon name={this.state.alarmState === true ? "lock" : "unlock"} size={consts.ICON_SIZE} color={consts.BLACK}/>
-                    </View>
+                    <Icon name="bolt" size={consts.ICON_SIZE} color={this.state.lightingState === true ? consts.YELLOW : consts.BLACK} style={styles.marginView}/>
                     <View style={styles.buttonView}>
                         <TouchableOpacity
                             style={[styles.buttonGlobalStyle, styles.buttonOnStyle, globalStyle.shadowStyle]}
-                            onPress={() => this.setState({ alarmState: true})}
+                            onPress={() => this.setState({lightingState: true})}
                         >
                             <Text style={styles.textButtonOn}>ON</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={[styles.buttonGlobalStyle, styles.buttonOffStyle, globalStyle.shadowStyle]}
-                            onPress={() => this.setState({ alarmState: false})}
+                            onPress={() => this.setState({lightingState: false})}
                         >
                             <Text style={styles.textButtonOff}>OFF</Text>
                         </TouchableOpacity>
@@ -59,7 +57,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     marginView: {
-        marginBottom: 45
+        marginBottom: 60
     },
     textTitle: {
         fontSize: consts.FONT_SIZE_TITLE,
@@ -90,14 +88,6 @@ const styles = StyleSheet.create({
     buttonOffStyle: {
         backgroundColor: consts.LIGHT_GRAY,
     },
-    circle: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 200,
-        height: 200,
-        borderRadius: 200 / 2,
-        backgroundColor: consts.BLUE,
-    },
 });
 
-export default Alarm;
+export default Lighting;

@@ -33,6 +33,12 @@ class Home extends Component {
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Alarm')}>
                         <Text>Alarme</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Lighting')}>
+                        <Text>Éclairage</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Shutter')}>
+                        <Text>Volets</Text>
+                    </TouchableOpacity>
                 </View>
             );
         }
