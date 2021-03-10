@@ -10,6 +10,7 @@ import Login from '../screens/connection/Login';
 import Register from '../screens/connection/Register';
 
 import Home from '../screens/house/Home';
+import Temperature from '../screens/house/Temperature';
 
 import SettingsHome from '../screens/settings/SettingsHome';
 import AboutUs from '../screens/settings/AboutUs';
@@ -86,6 +87,11 @@ function HomeComponent() {
         name="Home"
         component={Home}
         options={{ title: '', headerTransparent: true, gestureEnabled: false, headerLeft: null }}
+      />
+      <Stack.Screen
+        name="Temperature"
+        component={Temperature}
+        options={{ title: 'Température', headerTransparent: false, gestureEnabled: false, headerTintColor: '#FFF', headerStyle: { backgroundColor: consts.BLUE } }}
       />
 
       <Stack.Screen name="Stackstabs" component={StackTabs} options={{ title: '', headerShown: false, headerLeft: null, gestureEnabled: false }} />
