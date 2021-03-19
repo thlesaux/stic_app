@@ -45,19 +45,19 @@ class Home extends Component {
                             </View>
                             <Text style={[globalStyle.fontTextRegular, styles.textButton]}>Température</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Lighting')}>
                             <View style={styles.iconButton}>
                                 <Ionicon name="ios-bulb" size={30} color={consts.BLACK} />
                             </View>
                             <Text style={[globalStyle.fontTextRegular, styles.textButton]}>Lumières</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Alarm')}>
                             <View style={styles.iconButton}>
                                 <Icon name="lock" size={30} color={consts.BLACK} />
                             </View>
                             <Text style={[globalStyle.fontTextRegular, styles.textButton]}>Sécurité</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Shutter')}>
                             <View style={styles.iconButton}>
                                 <Icon name="ellipsis-h" size={30} color={consts.BLACK} />
                             </View>
@@ -70,6 +70,10 @@ class Home extends Component {
         }
     };
 }
+
+
+
+
 
 const styles = StyleSheet.create({
     container: {
