@@ -30,6 +30,15 @@ class Home extends Component {
             return (
                 <View style={styles.container}>
                     <Text>Home</Text>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Alarm')}>
+                        <Text>Alarme</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Lighting')}>
+                        <Text>Éclairage</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Shutter')}>
+                        <Text>Volets</Text>
+                    </TouchableOpacity>
                 </View>
             );
         }
