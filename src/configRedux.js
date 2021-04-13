@@ -1,9 +1,12 @@
 import { createStore, combineReducers } from 'redux';
 
-import test from './reducers/test';
+
+import rooms from './reducers/rooms';
+import houseEquipment from './reducers/houseEquipment';
 
 const reducer = combineReducers({
-    test : test
+    rooms : rooms,
+    houseEquipment: houseEquipment
 })
 
 export default createStore(reducer);

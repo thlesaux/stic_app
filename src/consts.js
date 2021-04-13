@@ -20,6 +20,24 @@ export default {
 
     FONT_SIZE_TITLE: 32,
     FONT_SIZE_BUTTON: 30,
-    ICON_SIZE: 50
-    
+    ICON_SIZE: 50,
+
+
+    ROOMS_AMENITIES: {
+        'kitchen': {
+            'light': { id: 255 },
+            'shutters': { id: 301 },
+            'temperature': { id: 21 },
+        },
+        'salon': {
+            'light': { id: 255 },
+            'shutters': { id: 301 },
+            'temperature': { id: 21 },
+        },
+        'bedroom': {
+            'light': { id: 255 },
+            'shutters': { id: 301 },
+            'temperature': { id: 21 },
+        },
+    },
 };
