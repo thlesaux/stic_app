@@ -11,7 +11,14 @@ class Shutter extends Component {
         super(props);
         this.state = {
             loading: false,
+            shutterState: false,
         };
+    }
+
+    async componentDidMount() {
+        this.setState({loading: true})
+        await this.getShutterState()
+        this.setState({loading: false})
     }
 
     render() {
@@ -31,11 +38,13 @@ class Shutter extends Component {
                         <View style={styles.buttonView}>
                             <TouchableOpacity
                                 style={[styles.buttonGlobalStyle, styles.buttonDownStyle, globalStyle.shadowStyle]}
+                                onPress={() => this.switchOff()}
                             >
                                 <Icon name="arrow-circle-down" size={consts.ICON_SIZE} color={consts.BLACK}/>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={[styles.buttonGlobalStyle, styles.buttonUpStyle, globalStyle.shadowStyle]}
+                                onPress={() => this.switchOn()}
                             >
                                 <Icon name="arrow-circle-up" size={consts.ICON_SIZE} color={consts.WHITE}/>
                             </TouchableOpacity>
@@ -50,6 +59,50 @@ class Shutter extends Component {
             );
         }
     };
+
+    async getShutterState() {
+        await fetch(consts.API_URL + '216', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "GET"
+        }).then(res => res.json())
+            .then(async data => {
+                data === 1 ? this.setState({shutterState: true}) : this.setState({shutterState: false})
+            })
+            .catch(error => {
+                console.log('error', error);
+            });
+    }
+
+    async switchOn() {
+        await fetch(consts.API_URL + '217', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "GET"
+        }).then(res => res.json())
+            .then(this.setState({shutterState: true}))
+            .catch(error => {
+                console.log('error', error);
+            });
+    }
+
+    async switchOff() {
+        await fetch(consts.API_URL + '218', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "GET"
+        }).then(res => res.json())
+            .then(this.setState({shutterState: false}))
+            .catch(error => {
+                console.log('error', error);
+            });
+    }
 }
 
 const styles = StyleSheet.create({
