@@ -15,6 +15,12 @@ class Alarm extends Component {
         };
     }
 
+    async componentDidMount() {
+        this.setState({loading: true})
+        await this.getAlarmState()
+        this.setState({loading: false})
+    }
+
     render() {
         if (this.state.loading) {
             return (
@@ -34,13 +40,13 @@ class Alarm extends Component {
                     <View style={styles.buttonView}>
                         <TouchableOpacity
                             style={[styles.buttonGlobalStyle, styles.buttonOnStyle, globalStyle.shadowStyle]}
-                            onPress={() => this.setState({ alarmState: true})}
+                            onPress={() => this.switchOn()}
                         >
                             <Text style={styles.textButtonOn}>ON</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={[styles.buttonGlobalStyle, styles.buttonOffStyle, globalStyle.shadowStyle]}
-                            onPress={() => this.setState({ alarmState: false})}
+                            onPress={() => this.switchOff()}
                         >
                             <Text style={styles.textButtonOff}>OFF</Text>
                         </TouchableOpacity>
@@ -49,6 +55,54 @@ class Alarm extends Component {
             );
         }
     };
+
+    async getAlarmState() {
+        await fetch(consts.API_URL + '199', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "GET"
+        }).then(res => res.json())
+            .then(async data => {
+                data === 1 ? this.setState({alarmState: true}) : this.setState({alarmState: false})
+            })
+            .catch(error => {
+                console.log('error', error);
+            });
+    }
+
+    async switchOn() {
+        await fetch(consts.API_URL + '200', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "GET"
+        }).then(res => res.json())
+            .then(async data => {
+                this.setState({alarmState: true})
+            })
+            .catch(error => {
+                console.log('error', error);
+            });
+    }
+
+    async switchOff() {
+        await fetch(consts.API_URL + '201', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "GET"
+        }).then(res => res.json())
+            .then(async data => {
+                this.setState({alarmState: false})
+            })
+            .catch(error => {
+                console.log('error', error);
+            });
+    }
 }
 
 const styles = StyleSheet.create({

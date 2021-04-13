@@ -15,6 +15,12 @@ class Lighting extends Component {
         };
     }
 
+    async componentDidMount() {
+        this.setState({loading: true})
+        await this.getLightState()
+        this.setState({loading: false})
+    }
+
     render() {
         if (this.state.loading) {
             return (
@@ -28,17 +34,19 @@ class Lighting extends Component {
                     <View style={styles.marginView}>
                         <Text style={[globalStyle.fontTextRegular, styles.textTitle]}>Éclairage</Text>
                     </View>
-                    <Icon name="bolt" size={consts.ICON_SIZE} color={this.state.lightingState === true ? consts.YELLOW : consts.BLACK} style={styles.marginView}/>
+                    <Icon name="bolt" size={consts.ICON_SIZE}
+                          color={this.state.lightingState === true ? consts.YELLOW : consts.BLACK}
+                          style={styles.marginView}/>
                     <View style={styles.buttonView}>
                         <TouchableOpacity
                             style={[styles.buttonGlobalStyle, styles.buttonOnStyle, globalStyle.shadowStyle]}
-                            onPress={() => this.setState({lightingState: true})}
+                            onPress={() => this.switchOn()}
                         >
                             <Text style={styles.textButtonOn}>ON</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={[styles.buttonGlobalStyle, styles.buttonOffStyle, globalStyle.shadowStyle]}
-                            onPress={() => this.setState({lightingState: false})}
+                            onPress={() => this.switchOff()}
                         >
                             <Text style={styles.textButtonOff}>OFF</Text>
                         </TouchableOpacity>
@@ -47,6 +55,52 @@ class Lighting extends Component {
             );
         }
     };
+
+    async getLightState() {
+        await fetch(consts.API_URL + '204', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "GET"
+        }).then(res => res.json())
+            .then(async data => {
+                data === 1 ? this.setState({lightingState: true}) : this.setState({lightingState: false})
+            })
+            .catch(error => {
+                console.log('error', error);
+            });
+    }
+
+    async switchOn() {
+        await fetch(consts.API_URL + '205', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "GET"
+        }).then(res => res.json())
+            .then(this.setState({lightingState: true}))
+            .catch(error => {
+                console.log('error', error);
+            });
+    }
+
+    async switchOff() {
+        await fetch(consts.API_URL + '206', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "GET"
+        }).then(res => res.json())
+            .then(async data => {
+                this.setState({lightingState: false})
+            })
+            .catch(error => {
+                console.log('error', error);
+            });
+    }
 }
 
 const styles = StyleSheet.create({

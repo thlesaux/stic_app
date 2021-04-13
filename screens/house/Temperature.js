@@ -19,9 +19,10 @@ class Temperature extends Component {
     }
 
     async componentDidMount() {
-
+        this.setState({loading: true})
+        await this.getTempState()
+        this.setState({loading: false})
     }
-
 
     getColorTemperature() {
         let color;
@@ -82,8 +83,6 @@ class Temperature extends Component {
         )
     }
 
-
-
     render() {
         if (this.state.loading) {
             return (
@@ -109,7 +108,7 @@ class Temperature extends Component {
                             sliderLength={consts.PHONE_WIDTH / 1.2}
                             customMarker={() => this.renderCustomMarker()}
                             customLabel={this.renderCustomLabel}
-                            onValuesChangeFinish={() => alert('envoie de la requete ...')}
+                            onValuesChangeFinish={() => this.switchTemperature()}
                         />
                         {/* <View style={{ flexDirection: 'row', width: consts.PHONE_WIDTH / 1.2, justifyContent: 'space-between' }}>
                             <Text style={[globalStyle.fontTextRegular, { fontSize: 18, color: '#482CB8' }]}>0°C</Text>
@@ -124,6 +123,35 @@ class Temperature extends Component {
             );
         }
     };
+
+    async getTempState() {
+        await fetch(consts.API_URL + '150', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "GET"
+        }).then(res => res.json())
+            .then(async data => {
+                this.setState({temperature: [data]})
+            })
+            .catch(error => {
+                console.log('error', error);
+            });
+    }
+
+    async switchTemperature() {
+        await fetch(consts.API_URL + '151&slider=' + this.state.temperature[0], {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "GET"
+        }).then(res => res.json())
+            .catch(error => {
+            console.log('error', error);
+        });
+    }
 }
 
 const styles = StyleSheet.create({
