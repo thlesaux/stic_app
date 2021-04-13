@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import globalStyle from '../../assets/styles/globalStyle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicon from "react-native-vector-icons/Ionicons";
+import { connect } from 'react-redux';
 
 import consts from '../../src/consts';
 
@@ -40,6 +41,41 @@ class Rooms extends Component {
         }));
     }
 
+    /**
+     * 
+     * @param {string} status 
+     * @param {int} id 
+     * Function with redux who save the current room
+     * 
+    */
+    setRoom(status) {
+        const action = {
+            type: status
+        }
+        this.props.dispatch(action);
+    }
+
+    handleRedirect(roomName) {
+        this.setRoom(roomName);
+
+        switch (this.props.equipment) {
+            case "light":
+                this.props.navigation.navigate('Lighting');
+                return;
+            case "temperature":
+                this.props.navigation.navigate('Temperature');
+                return;
+            case "others":
+                this.props.navigation.navigate('Shutter');
+                return;
+            default:
+                return;
+        }
+    }
+
+
+
+
 
     render() {
         if (this.state.loading) {
@@ -52,25 +88,25 @@ class Rooms extends Component {
         else {
             return (
                 <View style={styles.container}>
-                    <TouchableOpacity style={styles.containerRoom}>
+                    <TouchableOpacity style={styles.containerRoom} onPress={() => this.handleRedirect("kitchen")}>
                         <Image source={require('../../assets/rooms/kitchen.jpg')} style={[styles.room]} />
                         <Text style={[globalStyle.fontTextMedium, styles.textRoom]}>
                             Cuisine
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.containerRoom}>
+                    <TouchableOpacity style={styles.containerRoom} onPress={() => this.handleRedirect("bathroom")}>
                         <Image source={require('../../assets/rooms/bathroom.png')} style={[styles.room]} />
                         <Text style={[globalStyle.fontTextMedium, styles.textRoom]}>
                             Salle de bain
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.containerRoom}>
+                    <TouchableOpacity style={styles.containerRoom} onPress={() => this.handleRedirect("bedroom")}>
                         <Image source={require('../../assets/rooms/bedroom.jpg')} style={[styles.room]} />
                         <Text style={[globalStyle.fontTextMedium, styles.textRoom]}>
                             Chambre
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.containerRoom}>
+                    <TouchableOpacity style={styles.containerRoom} onPress={() => this.handleRedirect("salon")}>
                         <Image source={require('../../assets/rooms/salon.jpg')} style={[styles.room]} />
                         <Text style={[globalStyle.fontTextMedium, styles.textRoom]}>
                             Salon
@@ -124,4 +160,12 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Rooms;
+
+const mapStateToProps = (state) => {
+    return {
+        equipment: state.houseEquipment.name
+    };
+}
+
+export default connect(mapStateToProps)(Rooms);
+

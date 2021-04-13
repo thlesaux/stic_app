@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import globalStyle from '../../assets/styles/globalStyle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicon from "react-native-vector-icons/Ionicons";
+import { connect } from 'react-redux';
 
 import consts from '../../src/consts';
 
@@ -19,6 +20,25 @@ class Home extends Component {
 
     componentDidMount() {
     }
+
+
+
+    /**
+    * 
+    * @param {string} status 
+    * Function with redux who save the current equipment
+    * 
+   */
+    setEquipment(status) {
+        const action = {
+            type: status
+        }
+        this.props.dispatch(action);
+    }
+
+
+
+
 
 
     render() {
@@ -39,13 +59,13 @@ class Home extends Component {
                         <Icon name="home" size={200} color={consts.BLACK} />
                     </View>
                     <View style={{ width: '90%', alignItems: 'center' }}>
-                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Rooms')}>
+                        <TouchableOpacity style={styles.button} onPress={() => [this.setEquipment('temperature'), this.props.navigation.navigate('Rooms')]}>
                             <View style={styles.iconButton}>
                                 <Icon name="thermometer-three-quarters" size={30} color={consts.BLACK} />
                             </View>
                             <Text style={[globalStyle.fontTextRegular, styles.textButton]}>Température</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Lighting')}>
+                        <TouchableOpacity style={styles.button} onPress={() => [this.setEquipment('light'), this.props.navigation.navigate('Rooms')]}>
                             <View style={styles.iconButton}>
                                 <Ionicon name="ios-bulb" size={30} color={consts.BLACK} />
                             </View>
@@ -57,11 +77,10 @@ class Home extends Component {
                             </View>
                             <Text style={[globalStyle.fontTextRegular, styles.textButton]}>Sécurité</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Shutter')}>
+                        <TouchableOpacity style={styles.button} onPress={() => [this.setEquipment('others'), this.props.navigation.navigate('Rooms')]}>
                             <View style={styles.iconButton}>
                                 <Icon name="ellipsis-h" size={30} color={consts.BLACK} />
                             </View>
-
                             <Text style={[globalStyle.fontTextRegular, styles.textButton]}>Autres</Text>
                         </TouchableOpacity>
                     </View>
@@ -105,4 +124,12 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Home;
+
+const mapStateToProps = (state) => {
+    return {
+
+    };
+}
+
+export default connect(mapStateToProps)(Home);
+
