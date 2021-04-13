@@ -7,10 +7,14 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 
 import consts from '../../src/consts';
 
-const imageCuisine = { uri: "https://decorill.org/wp-content/uploads/2020/09/how-to-remodel-my-kitchen.jpg" };
-const imageSalleDeBain = { uri: "https://m.foiredeparis.fr/var/comexposium/storage/images/media/foire-de-paris/images/le-mag/articles/tendance_sdb_2019_img7/11420376-1-fre-FR/Tendance_SDB_2019_Img7.png" };
-const imageChambre = { uri: "https://www.bocadolobo.com/en/inspiration-and-ideas/wp-content/uploads/2018/03/Discover-the-Ultimate-Master-Bedroom-Styles-and-Inspirations-6_1.jpg" };
-const imageSalon = { uri: "https://www.cdeco.fr/wp-content/uploads/2018/05/conseil-deco-pour-un-salon-design-contemporain.jpg" };
+
+
+const images = {
+    'bathroom.png': require('../../assets/rooms/bathroom.png'),
+    'salon.jpg': require('../../assets/rooms/salon.jpg'),
+    'kitchen.jpg': require('../../assets/rooms/kitchen.jpg'),
+    'bedroom.jpg': require('../../assets/rooms/bedroom.jpg'),
+};
 
 class Rooms extends Component {
 
@@ -21,7 +25,19 @@ class Rooms extends Component {
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        this.setState({ loading: true });
+        this.loadImages(images).then((res) => { this.setState({ loading: false }) });
+    }
+
+    loadImages(images) {
+        return Promise.all(Object.keys(images).map((i) => {
+            let img = {
+                ...Image.resolveAssetSource(images[i]),
+                cache: 'force-cache'
+            };
+            return Image.prefetch(img);
+        }));
     }
 
 
@@ -37,25 +53,25 @@ class Rooms extends Component {
             return (
                 <View style={styles.container}>
                     <TouchableOpacity style={styles.containerRoom}>
-                        <Image source={imageCuisine} style={[styles.room]} />
+                        <Image source={require('../../assets/rooms/kitchen.jpg')} style={[styles.room]} />
                         <Text style={[globalStyle.fontTextMedium, styles.textRoom]}>
                             Cuisine
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.containerRoom}>
-                        <Image source={imageSalleDeBain} style={[styles.room]} />
+                        <Image source={require('../../assets/rooms/bathroom.png')} style={[styles.room]} />
                         <Text style={[globalStyle.fontTextMedium, styles.textRoom]}>
                             Salle de bain
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.containerRoom}>
-                        <Image source={imageChambre} style={[styles.room]} />
+                        <Image source={require('../../assets/rooms/bedroom.jpg')} style={[styles.room]} />
                         <Text style={[globalStyle.fontTextMedium, styles.textRoom]}>
                             Chambre
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.containerRoom}>
-                        <Image source={imageSalon} style={[styles.room]} />
+                        <Image source={require('../../assets/rooms/salon.jpg')} style={[styles.room]} />
                         <Text style={[globalStyle.fontTextMedium, styles.textRoom]}>
                             Salon
                         </Text>
@@ -75,7 +91,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: consts.BACKGROUND_COLOR,
         alignItems: 'center',
-        paddingTop: '30%'
+        paddingTop: '10%'
     },
     room: {
         flexDirection: "row",

@@ -100,7 +100,13 @@ function HomeComponent() {
             <Stack.Screen
                 name="Rooms"
                 component={Rooms}
-                options={{ title: '', headerTransparent: true, gestureEnabled: false, headerLeft: null }}
+                options={{
+                    title: '',
+                    headerTransparent: false,
+                    gestureEnabled: false,
+                    headerTintColor: consts.BLACK,
+                    headerStyle: { backgroundColor: consts.WHITE }
+                }}
             />
 
             <Stack.Screen
