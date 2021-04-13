@@ -12,6 +12,7 @@ import Login from '../screens/connection/Login';
 import Register from '../screens/connection/Register';
 
 import Home from '../screens/house/Home';
+import Rooms from '../screens/house/Rooms';
 import Temperature from '../screens/house/Temperature';
 import Alarm from '../screens/house/Alarm';
 import Lighting from '../screens/house/Lighting'
@@ -94,6 +95,11 @@ function HomeComponent() {
             <Stack.Screen
                 name="Home"
                 component={Home}
+                options={{ title: '', headerTransparent: true, gestureEnabled: false, headerLeft: null }}
+            />
+            <Stack.Screen
+                name="Rooms"
+                component={Rooms}
                 options={{ title: '', headerTransparent: true, gestureEnabled: false, headerLeft: null }}
             />
 

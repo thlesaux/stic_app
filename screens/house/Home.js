@@ -39,7 +39,7 @@ class Home extends Component {
                         <Icon name="home" size={200} color={consts.BLACK} />
                     </View>
                     <View style={{ width: '90%', alignItems: 'center' }}>
-                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Temperature')}>
+                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Rooms')}>
                             <View style={styles.iconButton}>
                                 <Icon name="thermometer-three-quarters" size={30} color={consts.BLACK} />
                             </View>
