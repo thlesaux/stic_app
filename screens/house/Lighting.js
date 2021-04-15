@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, TouchableOpacity } from 'react-native';
 import globalStyle from '../../assets/styles/globalStyle';
 import consts from '../../src/consts';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
+import {MaterialCommunityIcons} from "@expo/vector-icons";
 
 
 class Lighting extends Component {
@@ -20,6 +20,8 @@ class Lighting extends Component {
         this.setState({ loading: true });
         await this.getLightState();
         this.setState({ loading: false });
+
+        this.props.navigation.setOptions({ title:  consts.ROOMS_TRADUCTION[this.props.currentRoom] + ' - Éclairage' });
     }
 
     render() {
@@ -35,9 +37,11 @@ class Lighting extends Component {
                     <View style={styles.marginView}>
                         <Text style={[globalStyle.fontTextRegular, styles.textTitle]}>Éclairage</Text>
                     </View>
-                    <Icon name="bolt" size={consts.ICON_SIZE}
-                        color={this.state.lightingState === true ? consts.YELLOW : consts.BLACK}
-                        style={styles.marginView} />
+                    <MaterialCommunityIcons
+                        name={this.state.lightingState === true ? "lightbulb" : "lightbulb-off"} size={consts.ICON_SIZE}
+                        color={consts.BLACK}
+                        style={styles.marginView}
+                    />
                     <View style={styles.buttonView}>
                         <TouchableOpacity
                             style={[styles.buttonGlobalStyle, styles.buttonOnStyle, globalStyle.shadowStyle]}
@@ -119,7 +123,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     marginView: {
-        marginBottom: 60
+        marginBottom: 40
     },
     textTitle: {
         fontSize: consts.FONT_SIZE_TITLE,

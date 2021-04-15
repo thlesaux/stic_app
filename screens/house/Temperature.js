@@ -5,9 +5,6 @@ import consts from '../../src/consts';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-import Constants from 'expo-constants';
-import { EventRegister } from 'react-native-event-listeners';
-import * as SecureStore from 'expo-secure-store';
 
 class Temperature extends Component {
 
@@ -21,7 +18,9 @@ class Temperature extends Component {
     async componentDidMount() {
         this.setState({loading: true})
         await this.getTempState()
-        this.setState({loading: false});      
+        this.setState({loading: false});
+
+        this.props.navigation.setOptions({ title:  consts.ROOMS_TRADUCTION[this.props.currentRoom] + ' - Température' });
     }
 
     getColorTemperature() {
@@ -94,10 +93,6 @@ class Temperature extends Component {
         else {
             return (
                 <View style={styles.container}>
-                    {/* <View style={{}}>
-                        <Icon name="home" size={100} color={consts.BLACK} />
-                    </View> */}
-
                     <View>
                         <MultiSlider
                             values={this.state.temperature}
@@ -112,10 +107,6 @@ class Temperature extends Component {
                             min={15}
                             step={0.5}
                         />
-                        {/* <View style={{ flexDirection: 'row', width: consts.PHONE_WIDTH / 1.2, justifyContent: 'space-between' }}>
-                            <Text style={[globalStyle.fontTextRegular, { fontSize: 18, color: '#482CB8' }]}>0°C</Text>
-                            <Text style={[globalStyle.fontTextRegular, { fontSize: 18, color: consts.RED }]}>30°C</Text>
-                        </View> */}
                         <View style={{ flexDirection: 'row', width: consts.PHONE_WIDTH / 1.2, justifyContent: 'space-between' }}>
                             <Icon name="thermometer-empty" size={25} color={'#1184e8'} />
                             <Icon name="thermometer-full" size={25} color={consts.RED} />

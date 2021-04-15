@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { Provider } from 'react-redux';
 import globalStyle from '../../assets/styles/globalStyle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicon from "react-native-vector-icons/Ionicons";
@@ -20,8 +19,6 @@ class Home extends Component {
 
     componentDidMount() {
     }
-
-
 
     /**
     * 
@@ -126,9 +123,7 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = (state) => {
-    return {
-
-    };
+    return {};
 }
 
 export default connect(mapStateToProps)(Home);

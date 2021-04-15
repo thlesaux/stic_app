@@ -44,4 +44,11 @@ export default {
             'temperature': { id_get: 333, id_set: 334 },
         },
     },
+
+    ROOMS_TRADUCTION: {
+        'kitchen': 'Cuisine',
+        'salon': 'Salon',
+        'bedroom' : 'Chambre',
+        'bathroom': 'Salle de bain'
+    }
 };

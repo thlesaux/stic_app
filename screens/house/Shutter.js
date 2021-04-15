@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, ActivityIndicator, TouchableOpacity} from 'react
 import globalStyle from '../../assets/styles/globalStyle';
 import consts from '../../src/consts';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
 
@@ -20,6 +21,8 @@ class Shutter extends Component {
         this.setState({loading: true})
         await this.getShutterState()
         this.setState({loading: false})
+
+        this.props.navigation.setOptions({ title:  consts.ROOMS_TRADUCTION[this.props.currentRoom] + ' - Volets' });
     }
 
     render() {
@@ -36,23 +39,23 @@ class Shutter extends Component {
                         <View style={styles.marginView}>
                             <Text style={[globalStyle.fontTextRegular, styles.textTitle]}>Volets</Text>
                         </View>
+                        <MaterialCommunityIcons
+                            name={this.state.shutterState === true ? "window-shutter-open" : "window-shutter"} size={consts.ICON_SIZE}
+                            color={consts.BLACK}
+                            style={styles.marginView}
+                        />
                         <View style={styles.buttonView}>
-                            <TouchableOpacity
-                                style={[styles.buttonGlobalStyle, styles.buttonDownStyle, globalStyle.shadowStyle]}
-                                onPress={() => this.switchOff()}
-                            >
-                                <Icon name="arrow-circle-down" size={consts.ICON_SIZE} color={consts.BLACK}/>
-                            </TouchableOpacity>
                             <TouchableOpacity
                                 style={[styles.buttonGlobalStyle, styles.buttonUpStyle, globalStyle.shadowStyle]}
                                 onPress={() => this.switchOn()}
                             >
-                                <Icon name="arrow-circle-up" size={consts.ICON_SIZE} color={consts.WHITE}/>
+                                <Icon name="arrow-circle-up" size={consts.ICON_SIZE} color={consts.BLACK}/>
                             </TouchableOpacity>
                             <TouchableOpacity
-                                style={[styles.buttonGlobalStyle, styles.buttonStopStyle, globalStyle.shadowStyle]}
+                                style={[styles.buttonGlobalStyle, styles.buttonDownStyle, globalStyle.shadowStyle]}
+                                onPress={() => this.switchOff()}
                             >
-                                <Text style={styles.textButtonStop}>STOP</Text>
+                                <Icon name="arrow-circle-down" size={consts.ICON_SIZE} color={consts.WHITE}/>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -123,22 +126,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     marginView: {
-        marginBottom: 45
+        marginBottom: 15
     },
     textTitle: {
         fontSize: consts.FONT_SIZE_TITLE,
         color: consts.BLACK
     },
-    textButtonStop: {
-        fontSize: consts.FONT_SIZE_BUTTON,
-        color: consts.WHITE,
-        marginTop: 'auto',
-        marginBottom: 'auto'
-    },
     buttonView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: 280
+        width: 200
     },
     buttonGlobalStyle: {
         padding: 10,
@@ -146,14 +143,11 @@ const styles = StyleSheet.create({
         paddingRight: 15,
         borderRadius: 5,
     },
-    buttonDownStyle: {
+    buttonUpStyle: {
         backgroundColor: consts.BLUE,
     },
-    buttonUpStyle: {
+    buttonDownStyle: {
         backgroundColor: consts.LIGHT_GRAY,
-    },
-    buttonStopStyle: {
-        backgroundColor: consts.RED,
     },
     rectangle: {
         alignItems: 'center',

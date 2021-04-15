@@ -4,9 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from "react-native-vector-icons/Ionicons";
-import globalStyle from '../assets/styles/globalStyle';
 import consts from '../src/consts';
-import Button from 'react-native'
 
 import Login from '../screens/connection/Login';
 import Register from '../screens/connection/Register';
@@ -104,15 +102,21 @@ function HomeComponent() {
                     title: '',
                     headerTransparent: false,
                     gestureEnabled: false,
-                    headerTintColor: consts.BLACK,
-                    headerStyle: { backgroundColor: consts.WHITE }
+                    headerTintColor: '#FFF',
+                    headerStyle: { backgroundColor: consts.BLUE }
                 }}
             />
 
             <Stack.Screen
                 name="Temperature"
                 component={Temperature}
-                options={{ title: 'Température', headerTransparent: false, gestureEnabled: false, headerTintColor: '#FFF', headerStyle: { backgroundColor: consts.BLUE } }}
+                options={{
+                    title: 'Température',
+                    headerTransparent: false,
+                    gestureEnabled: false,
+                    headerTintColor: '#FFF',
+                    headerStyle: { backgroundColor: consts.BLUE }
+                }}
             />
 
             <Stack.Screen
@@ -122,8 +126,8 @@ function HomeComponent() {
                     title: 'Alarme',
                     headerTransparent: false,
                     gestureEnabled: false,
-                    headerTintColor: consts.BLACK,
-                    headerStyle: { backgroundColor: consts.WHITE }
+                    headerTintColor: '#FFF',
+                    headerStyle: { backgroundColor: consts.BLUE }
                 }}
             />
             <Stack.Screen
@@ -133,8 +137,8 @@ function HomeComponent() {
                     title: 'Éclairage',
                     headerTransparent: false,
                     gestureEnabled: false,
-                    headerTintColor: consts.BLACK,
-                    headerStyle: { backgroundColor: consts.WHITE }
+                    headerTintColor: '#FFF',
+                    headerStyle: { backgroundColor: consts.BLUE }
                 }}
             />
             <Stack.Screen
@@ -144,8 +148,8 @@ function HomeComponent() {
                     title: 'Volets',
                     headerTransparent: false,
                     gestureEnabled: false,
-                    headerTintColor: consts.BLACK,
-                    headerStyle: { backgroundColor: consts.WHITE }
+                    headerTintColor: '#FFF',
+                    headerStyle: { backgroundColor: consts.BLUE }
                 }}
             />
 

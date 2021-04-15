@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, ActivityIndicator, TextInput, Keyboard } from 'react-native';
-import { Provider } from 'react-redux';
 import globalStyle from '../../assets/styles/globalStyle';
 import consts from '../../src/consts';
 
