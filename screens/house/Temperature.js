@@ -28,34 +28,34 @@ class Temperature extends Component {
         let color;
 
         switch (true) {
-            case (this.state.temperature[0] >= 27):
+            case (this.state.temperature[0] >= 26.5):
                 color = '#F11A1A'
                 break;
-            case (this.state.temperature[0] >= 24 && this.state.temperature[0] < 27):
+            case (this.state.temperature[0] >= 25.5 && this.state.temperature[0] < 26.5):
                 color = '#EA3217'
                 break;
-            case (this.state.temperature[0] >= 21 && this.state.temperature[0] < 24):
+            case (this.state.temperature[0] >= 23.5 && this.state.temperature[0] < 25.5):
                 color = '#E34A15'
                 break;
-            case (this.state.temperature[0] >= 18 && this.state.temperature[0] < 21):
+            case (this.state.temperature[0] >= 22.5 && this.state.temperature[0] < 23.5):
                 color = '#DC6212'
                 break;
-            case (this.state.temperature[0] >= 15 && this.state.temperature[0] < 18):
+            case (this.state.temperature[0] >= 21.5 && this.state.temperature[0] < 22.5):
                 color = '#D57A0F'
                 break;
-            case (this.state.temperature[0] >= 12 && this.state.temperature[0] < 15):
+            case (this.state.temperature[0] >= 19.5 && this.state.temperature[0] < 21.5):
                 color = '#CE920D'
                 break;
-            case (this.state.temperature[0] >= 9 && this.state.temperature[0] < 12):
+            case (this.state.temperature[0] >= 18.5 && this.state.temperature[0] < 19.5):
                 color = '#C7AA0A'
                 break;
-            case (this.state.temperature[0] >= 6 && this.state.temperature[0] < 9):
+            case (this.state.temperature[0] >= 17.5 && this.state.temperature[0] < 18.5):
                 color = '#9D8044'
                 break;
-            case (this.state.temperature[0] >= 3 && this.state.temperature[0] < 6):
+            case (this.state.temperature[0] >= 16.5 && this.state.temperature[0] < 17.5):
                 color = '#73567E'
                 break;
-            case (this.state.temperature[0] >= 0 && this.state.temperature[0] < 3):
+            case (this.state.temperature[0] >= 15 && this.state.temperature[0] < 16.5):
                 color = '#482CB8'
                 break;
 
@@ -102,13 +102,15 @@ class Temperature extends Component {
                         <MultiSlider
                             values={this.state.temperature}
                             onValuesChange={(temperature) => this.setState({ temperature: temperature })}
-                            max={30}
                             selectedStyle={{ backgroundColor: consts.BLACK, alignSelf: 'center' }}
                             enableLabel={true}
                             sliderLength={consts.PHONE_WIDTH / 1.2}
                             customMarker={() => this.renderCustomMarker()}
                             customLabel={this.renderCustomLabel}
                             onValuesChangeFinish={() => this.switchTemperature()}
+                            max={28}
+                            min={15}
+                            step={0.5}
                         />
                         {/* <View style={{ flexDirection: 'row', width: consts.PHONE_WIDTH / 1.2, justifyContent: 'space-between' }}>
                             <Text style={[globalStyle.fontTextRegular, { fontSize: 18, color: '#482CB8' }]}>0°C</Text>
