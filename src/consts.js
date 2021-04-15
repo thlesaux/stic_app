@@ -22,22 +22,26 @@ export default {
     FONT_SIZE_BUTTON: 30,
     ICON_SIZE: 50,
 
-
     ROOMS_AMENITIES: {
         'kitchen': {
-            'light': { id: 255 },
-            'shutters': { id: 301 },
-            'temperature': { id: 21 },
+            'light': { id_on: 222, id_off: 223, id_get : 221 },
+            'others': { id_on: 358, id_off: 360, id_get : 357},
+            'temperature': { id_get: 279, id_set: 280 },
         },
         'salon': {
-            'light': { id: 255 },
-            'shutters': { id: 301 },
-            'temperature': { id: 21 },
+            'light': { id_on: 241, id_off: 243, id_get : 240 },
+            'others': { id_on: 354, id_off: 355, id_get : 353 },
+            'temperature': { id_get: 297, id_set: 298 },
         },
         'bedroom': {
-            'light': { id: 255 },
-            'shutters': { id: 301 },
-            'temperature': { id: 21 },
+            'light': { id_on: 232, id_off: 233, id_get : 231 },
+            'others': { id_on: 368, id_off: 370, id_get : 367 },
+            'temperature': { id_get: 315, id_set: 316 },
+        },
+        'bathroom': {
+            'light': { id_on: 236, id_off: 238, id_get : 235 },
+            'others': { id_on: 363, id_off: 365, id_get : 362},
+            'temperature': { id_get: 333, id_set: 334 },
         },
     },
 };

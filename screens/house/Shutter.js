@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, ActivityIndicator, TouchableOpacity} from 'react
 import globalStyle from '../../assets/styles/globalStyle';
 import consts from '../../src/consts';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { connect } from 'react-redux';
 
 
 class Shutter extends Component {
@@ -61,7 +62,12 @@ class Shutter extends Component {
     };
 
     async getShutterState() {
-        await fetch(consts.API_URL + '216', {
+        console.log(this.props.currentRoom);
+        console.log(this.props.equipment);
+
+        const id_get = consts.ROOMS_AMENITIES[this.props.currentRoom][this.props.equipment].id_get;
+        
+        await fetch(consts.API_URL + id_get, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -77,7 +83,9 @@ class Shutter extends Component {
     }
 
     async switchOn() {
-        await fetch(consts.API_URL + '217', {
+        const id_on = consts.ROOMS_AMENITIES[this.props.currentRoom][this.props.equipment].id_on;
+
+        await fetch(consts.API_URL + id_on, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -91,7 +99,9 @@ class Shutter extends Component {
     }
 
     async switchOff() {
-        await fetch(consts.API_URL + '218', {
+        const id_off = consts.ROOMS_AMENITIES[this.props.currentRoom][this.props.equipment].id_off;
+
+        await fetch(consts.API_URL + id_off, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -154,4 +164,12 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Shutter;
+
+const mapStateToProps = (state) => {
+    return {
+        equipment: state.houseEquipment.name,
+        currentRoom: state.rooms.name
+    };
+}
+
+export default connect(mapStateToProps)(Shutter);

@@ -21,7 +21,7 @@ class Temperature extends Component {
     async componentDidMount() {
         this.setState({loading: true})
         await this.getTempState()
-        this.setState({loading: false})
+        this.setState({loading: false});      
     }
 
     getColorTemperature() {
@@ -125,7 +125,10 @@ class Temperature extends Component {
     };
 
     async getTempState() {
-        await fetch(consts.API_URL + '150', {
+        const idGetTemerature = consts.ROOMS_AMENITIES[this.props.currentRoom][this.props.equipment].id_get;
+
+
+        await fetch(consts.API_URL + idGetTemerature, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -141,7 +144,9 @@ class Temperature extends Component {
     }
 
     async switchTemperature() {
-        await fetch(consts.API_URL + '151&slider=' + this.state.temperature[0], {
+        const idSetTemerature = consts.ROOMS_AMENITIES[this.props.currentRoom][this.props.equipment].id_set;
+
+        await fetch(consts.API_URL + `${idSetTemerature}&slider=` + this.state.temperature[0], {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -163,4 +168,12 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Temperature;
+
+const mapStateToProps = (state) => {
+    return {
+        equipment: state.houseEquipment.name,
+        currentRoom: state.rooms.name
+    };
+}
+
+export default connect(mapStateToProps)(Temperature);

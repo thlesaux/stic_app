@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
-import {StyleSheet, Text, View, ActivityIndicator, TouchableOpacity} from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, ActivityIndicator, TouchableOpacity } from 'react-native';
 import globalStyle from '../../assets/styles/globalStyle';
 import consts from '../../src/consts';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { connect } from 'react-redux';
 
 
 class Lighting extends Component {
@@ -16,16 +17,16 @@ class Lighting extends Component {
     }
 
     async componentDidMount() {
-        this.setState({loading: true})
-        await this.getLightState()
-        this.setState({loading: false})
+        this.setState({ loading: true });
+        await this.getLightState();
+        this.setState({ loading: false });
     }
 
     render() {
         if (this.state.loading) {
             return (
                 <View style={globalStyle.containerLoading}>
-                    <ActivityIndicator size="large" color={consts.BLUE}/>
+                    <ActivityIndicator size="large" color={consts.BLUE} />
                 </View>
             );
         } else {
@@ -35,8 +36,8 @@ class Lighting extends Component {
                         <Text style={[globalStyle.fontTextRegular, styles.textTitle]}>Éclairage</Text>
                     </View>
                     <Icon name="bolt" size={consts.ICON_SIZE}
-                          color={this.state.lightingState === true ? consts.YELLOW : consts.BLACK}
-                          style={styles.marginView}/>
+                        color={this.state.lightingState === true ? consts.YELLOW : consts.BLACK}
+                        style={styles.marginView} />
                     <View style={styles.buttonView}>
                         <TouchableOpacity
                             style={[styles.buttonGlobalStyle, styles.buttonOnStyle, globalStyle.shadowStyle]}
@@ -57,7 +58,9 @@ class Lighting extends Component {
     };
 
     async getLightState() {
-        await fetch(consts.API_URL + '204', {
+        const id_get = consts.ROOMS_AMENITIES[this.props.currentRoom][this.props.equipment].id_get;
+        
+        await fetch(consts.API_URL + id_get, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -65,7 +68,7 @@ class Lighting extends Component {
             method: "GET"
         }).then(res => res.json())
             .then(async data => {
-                data === 1 ? this.setState({lightingState: true}) : this.setState({lightingState: false})
+                data === 1 ? this.setState({ lightingState: true }) : this.setState({ lightingState: false })
             })
             .catch(error => {
                 console.log('error', error);
@@ -73,21 +76,26 @@ class Lighting extends Component {
     }
 
     async switchOn() {
-        await fetch(consts.API_URL + '205', {
+        const id_on = consts.ROOMS_AMENITIES[this.props.currentRoom][this.props.equipment].id_on;
+        console.log(id_on);
+
+        await fetch(consts.API_URL + id_on, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             method: "GET"
         }).then(res => res.json())
-            .then(this.setState({lightingState: true}))
+            .then(this.setState({ lightingState: true }))
             .catch(error => {
                 console.log('error', error);
             });
     }
 
     async switchOff() {
-        await fetch(consts.API_URL + '206', {
+        const id_off = consts.ROOMS_AMENITIES[this.props.currentRoom][this.props.equipment].id_off;
+
+        await fetch(consts.API_URL + id_off, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -95,7 +103,7 @@ class Lighting extends Component {
             method: "GET"
         }).then(res => res.json())
             .then(async data => {
-                this.setState({lightingState: false})
+                this.setState({ lightingState: false })
             })
             .catch(error => {
                 console.log('error', error);
@@ -144,4 +152,12 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Lighting;
+
+const mapStateToProps = (state) => {
+    return {
+        equipment: state.houseEquipment.name,
+        currentRoom: state.rooms.name
+    };
+}
+
+export default connect(mapStateToProps)(Lighting);
