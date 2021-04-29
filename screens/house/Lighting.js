@@ -64,7 +64,7 @@ class Lighting extends Component {
     async getLightState() {
         const id_get = consts.ROOMS_AMENITIES[this.props.currentRoom][this.props.equipment].id_get;
         
-        await fetch(consts.API_URL + id_get, {
+        await fetch(consts.API_URL_JEEDOM + id_get, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ class Lighting extends Component {
         const id_on = consts.ROOMS_AMENITIES[this.props.currentRoom][this.props.equipment].id_on;
         console.log(id_on);
 
-        await fetch(consts.API_URL + id_on, {
+        await fetch(consts.API_URL_JEEDOM + id_on, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -99,7 +99,7 @@ class Lighting extends Component {
     async switchOff() {
         const id_off = consts.ROOMS_AMENITIES[this.props.currentRoom][this.props.equipment].id_off;
 
-        await fetch(consts.API_URL + id_off, {
+        await fetch(consts.API_URL_JEEDOM + id_off, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'

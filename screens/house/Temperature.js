@@ -121,7 +121,7 @@ class Temperature extends Component {
         const idGetTemerature = consts.ROOMS_AMENITIES[this.props.currentRoom][this.props.equipment].id_get;
 
 
-        await fetch(consts.API_URL + idGetTemerature, {
+        await fetch(consts.API_URL_JEEDOM + idGetTemerature, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -139,7 +139,7 @@ class Temperature extends Component {
     async switchTemperature() {
         const idSetTemerature = consts.ROOMS_AMENITIES[this.props.currentRoom][this.props.equipment].id_set;
 
-        await fetch(consts.API_URL + `${idSetTemerature}&slider=` + this.state.temperature[0], {
+        await fetch(consts.API_URL_JEEDOM + `${idSetTemerature}&slider=` + this.state.temperature[0], {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'

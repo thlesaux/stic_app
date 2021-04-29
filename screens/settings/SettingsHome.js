@@ -46,7 +46,7 @@ class SettingsHome extends Component {
   async getUserInfo() {
     const token = await this.getToken();
 
-    await fetch(consts.API_URL + '/api/getUser', {
+    await fetch(consts.API_URL_JEEDOM + '/api/getUser', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
