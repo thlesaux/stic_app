@@ -27,8 +27,8 @@ class Rooms extends Component {
     }
 
     async componentDidMount() {
-        this.setState({ loading: true });
-        this.loadImages(images).then((res) => { this.setState({ loading: false }) });
+        // this.setState({ loading: true });
+        // this.loadImages(images).then((res) => { this.setState({ loading: false }) });
     }
 
     loadImages(images) {
@@ -88,25 +88,25 @@ class Rooms extends Component {
         else {
             return (
                 <View style={styles.container}>
-                    <TouchableOpacity style={styles.containerRoom} onPress={() => this.handleRedirect("kitchen")}>
+                    <TouchableOpacity style={[styles.containerRoom, globalStyle.shadowStyle]} onPress={() => this.handleRedirect("kitchen")}>
                         <Image source={require('../../assets/rooms/kitchen.jpg')} style={[styles.room]} />
                         <Text style={[globalStyle.fontTextMedium, styles.textRoom]}>
                             Cuisine
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.containerRoom} onPress={() => this.handleRedirect("bathroom")}>
+                    <TouchableOpacity style={[styles.containerRoom, globalStyle.shadowStyle]} onPress={() => this.handleRedirect("bathroom")}>
                         <Image source={require('../../assets/rooms/bathroom.png')} style={[styles.room]} />
                         <Text style={[globalStyle.fontTextMedium, styles.textRoom]}>
                             Salle de bain
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.containerRoom} onPress={() => this.handleRedirect("bedroom")}>
+                    <TouchableOpacity style={[styles.containerRoom, globalStyle.shadowStyle]} onPress={() => this.handleRedirect("bedroom")}>
                         <Image source={require('../../assets/rooms/bedroom.jpg')} style={[styles.room]} />
                         <Text style={[globalStyle.fontTextMedium, styles.textRoom]}>
                             Chambre
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.containerRoom} onPress={() => this.handleRedirect("salon")}>
+                    <TouchableOpacity style={[styles.containerRoom, globalStyle.shadowStyle]} onPress={() => this.handleRedirect("salon")}>
                         <Image source={require('../../assets/rooms/salon.jpg')} style={[styles.room]} />
                         <Text style={[globalStyle.fontTextMedium, styles.textRoom]}>
                             Salon
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         height: 80,
         position: "relative",
-        opacity: .7
+        opacity: .5
     },
     textRoom: {
         color: "#000",
