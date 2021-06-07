@@ -46,7 +46,7 @@ class SettingsHome extends Component {
   async getUserInfo() {
     const token = await this.getToken();
 
-    await fetch(consts.API_URL + '/api/getUser', {
+    await fetch(consts.API_URL_JEEDOM + '/api/getUser', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -121,21 +121,9 @@ class SettingsHome extends Component {
         <View style={styles.container}>
           <View style={styles.containerTitle}>
             <Text style={[globalStyle.fontTitleRegular, styles.titleText]}>Mon compte</Text>
-            <Text style={[globalStyle.fontTextRegular, styles.textUserInfo]}>Inscrit le N/A</Text>
-            <Text style={[globalStyle.fontTextRegular, styles.textUserInfo]}>Luap</Text>
           </View>
 
           <View style={[styles.containerButtonsSettings]}>
-            <TouchableOpacity style={styles.buttonSetting} onPress={() => this.props.navigation.navigate('FormEditInformation')}>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Icon name="ios-information-circle" size={24} color={consts.BLACK} />
-                <Text style={[globalStyle.fontTextRegular, styles.textButtonSetting]}>
-                  Mes informations
-              </Text>
-              </View>
-              <Icon name="ios-arrow-forward" size={20} color={consts.BLACK} />
-            </TouchableOpacity>
-
             <TouchableOpacity style={styles.buttonSetting}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Icon name="ios-sync" size={24} color={consts.BLACK} />

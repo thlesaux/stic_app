@@ -50,7 +50,7 @@ class Home extends Component {
             return (
                 <View style={styles.container}>
                     <View style={{ width: '90%', marginTop: '8%' }}>
-                        <Text style={[globalStyle.fontTextRegular, { fontSize: 32, color: consts.BLACK }]}>Bienvenue, Julien</Text>
+                        <Text style={[globalStyle.fontTextRegular, { fontSize: 32, color: consts.BLACK }]}>Bienvenue</Text>
                     </View>
                     <View style={{ width: '90%', alignItems: 'center' }}>
                         <Icon name="home" size={200} color={consts.BLACK} />

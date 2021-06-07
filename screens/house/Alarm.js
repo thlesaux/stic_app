@@ -57,7 +57,7 @@ class Alarm extends Component {
     };
 
     async getAlarmState() {
-        await fetch(consts.API_URL + '199', {
+        await fetch(consts.API_URL_JEEDOM + '199', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ class Alarm extends Component {
     }
 
     async switchOn() {
-        await fetch(consts.API_URL + '200', {
+        await fetch(consts.API_URL_JEEDOM + '200', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -89,7 +89,7 @@ class Alarm extends Component {
     }
 
     async switchOff() {
-        await fetch(consts.API_URL + '201', {
+        await fetch(consts.API_URL_JEEDOM + '201', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'

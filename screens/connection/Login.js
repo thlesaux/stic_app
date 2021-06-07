@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, ActivityIndicator, TextInput, Keyboard } from 'react-native';
 import globalStyle from '../../assets/styles/globalStyle';
 import consts from '../../src/consts';
+import * as SecureStore from 'expo-secure-store';
+
 
 
 class Login extends Component {
@@ -9,10 +11,63 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: null,
-            password: null
+            login: null,
+            password: null,
+            loading: false,
+            errorConnection: false
         };
     }
+
+    async componentDidMount() {
+
+    }
+
+    async handleLogin() {
+        this.setState({ loading: true });
+
+        await fetch(consts.API_URL + '/api/login', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify({
+                login: this.state.login,
+                password: this.state.password,
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.response.status == 200) {
+                    this.handleSignIn(data);
+                }
+                else {
+                    this.setState({
+                        loading: false,
+                        errorConnection: true
+                    });
+                }
+            })
+            .catch(e => {
+                this.setState({ loading: false });
+                alert('An error occurred ...');
+                console.log(e);
+            })
+    }
+
+
+    handleSignIn = async (data) => {
+        await SecureStore.setItemAsync('secure_token', data.response.token);
+        Keyboard.dismiss();
+        this.props.navigation.navigate('Stackstabs');
+        this.setState({
+            loading: false,
+            errorConnection: false,
+            login: null,
+            password: null
+        });
+    }
+
 
     render() {
         return (
@@ -22,10 +77,10 @@ class Login extends Component {
                 </View>
                 <View style={styles.containerListInput}>
                     <View style={[styles.inputContainer, { marginBottom: '5%' }]}>
-                        <Text style={[globalStyle.fontTextRegular, styles.labelInput]}>Email</Text>
+                        <Text style={[globalStyle.fontTextRegular, styles.labelInput]}>Nom d'utilisateur</Text>
                         <TextInput
-                            value={this.state.email}
-                            onChangeText={(email) => { this.setState({ email }); }}
+                            value={this.state.login}
+                            onChangeText={(login) => { this.setState({ login }); }}
                             style={[styles.input, globalStyle.fontTextRegular]}
                             autoCapitalize='none'
                             autoCorrect={false}
@@ -42,11 +97,24 @@ class Login extends Component {
                             secureTextEntry={true}
                         />
                     </View>
+                    {
+                        this.state.errorConnection &&
+                        <Text style={[globalStyle.fontTextMedium, styles.textError]}>
+                            Nom d'utilisateur ou mot de passe incorrect ...
+                        </Text>
+                    }
                 </View>
+
                 <View style={{ width: '100%', alignItems: 'center' }}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Stackstabs')} style={styles.buttonConnect}>
+                    <TouchableOpacity onPress={() => this.handleLogin()} style={styles.buttonConnect}>
                         <Text style={[globalStyle.fontTextRegular, styles.buttonConnectText]}>Se connecter</Text>
+                        {
+                            this.state.loading &&
+                            <ActivityIndicator size="small" color={consts.BLACK} style={{ marginLeft: '5%' }} />
+                        }
+
                     </TouchableOpacity>
+
                     <View>
                         <Text style={globalStyle.fontTextRegular}>Pas encore de compte ?
                             <Text style={{ color: consts.BLUE }} onPress={() => this.props.navigation.navigate('Register')}>
@@ -91,24 +159,30 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: '90%',
+        marginBottom: '2%'
     },
     labelInput: {
         fontSize: 16,
         marginBottom: '2%'
     },
     buttonConnect: {
-        backgroundColor: consts.BLUE,
+        flexDirection: "row",
+        justifyContent: "center",
         alignItems: 'center',
-        paddingTop: '4%',
-        paddingBottom: '4%',
+        backgroundColor: consts.BLUE,
+        // paddingBottom: '4%',
         borderRadius: 5,
-        // padding: '4%',
+        padding: '5%',
         width: '70%',
         marginBottom: '3%'
     },
     buttonConnectText: {
         fontSize: 20,
         color: '#FFF'
+    },
+    textError: {
+        color: consts.RED,
+        width: '90%'
     }
 });
 
