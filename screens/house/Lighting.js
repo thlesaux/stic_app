@@ -39,7 +39,7 @@ class Lighting extends Component {
                     </View>
                     <MaterialCommunityIcons
                         name={this.state.lightingState === true ? "lightbulb" : "lightbulb-off"} size={consts.ICON_SIZE}
-                        color={consts.BLACK}
+                        color={this.state.lightingState === true ? consts.YELLOW : consts.BLACK}
                         style={styles.marginView}
                     />
                     <View style={styles.buttonView}>
